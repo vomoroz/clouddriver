@@ -907,7 +907,10 @@ class KubernetesApiConverter {
 
     podTemplateSpecBuilder = podTemplateSpecBuilder.withContainers(containers)
 
-    return podTemplateSpecBuilder.endSpec().build()
+    def podTemplateSpec = podTemplateSpecBuilder.endSpec().build()
+    podTemplateSpec.spec.terminationGracePeriodSeconds = description.terminationGracePeriodSeconds
+
+    return podTemplateSpec
   }
 
   static boolean hasDeployment(DeployKubernetesAtomicOperationDescription description) {
