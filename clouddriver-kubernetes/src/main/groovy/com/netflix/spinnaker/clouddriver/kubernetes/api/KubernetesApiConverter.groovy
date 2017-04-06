@@ -908,7 +908,9 @@ class KubernetesApiConverter {
     podTemplateSpecBuilder = podTemplateSpecBuilder.withContainers(containers)
 
     def podTemplateSpec = podTemplateSpecBuilder.endSpec().build()
-    podTemplateSpec.spec.terminationGracePeriodSeconds = description.terminationGracePeriodSeconds
+    if (description.terminationGracePeriodSeconds) {
+      podTemplateSpec.spec?.terminationGracePeriodSeconds = description.terminationGracePeriodSeconds
+    }
 
     return podTemplateSpec
   }
