@@ -617,6 +617,8 @@ class KubernetesApiConverter {
       fromContainer(it)
     } ?: []
 
+    deployDescription.terminationGracePeriodSeconds = replicaSet?.spec?.template?.spec?.terminationGracePeriodSeconds
+
     return deployDescription
   }
 
